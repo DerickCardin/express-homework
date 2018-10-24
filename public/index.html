@@ -1,10 +1,32 @@
+ (8 sloc)  130 Bytes
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+    <script>
+      $(document).ready(function(){
+        var user,pass;
+        $("#submit").click(function(){
+          user=$("#user").val();
+          pass=$("#password").val();
+          $.post("http://github-derickc50.c9users.io/user/Derick/Cardin",{user: user,password: pass}, function(data){
+            if(data==='done')
+              {
+                alert("login success");
+              }
+          });
+        });
+      });
+    </script>
         <title>Express Work</title>
     </head>
     <body>
-        
+        <p>
+             <input type="TEXT" id="user" size="40"><br>
+    <input type="password" id="password" size="40"><br>
+    <input type="button" id="submit" value="Submit">
+            
+        </p>
         
     </body>
 </html>
