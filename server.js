@@ -54,12 +54,12 @@ app.post('/sport/:item', (req,res) => {
 //Delete an item from the array
 app.delete('/sports/:item', (req, res, next) => {
   const item = req.params.item;
-  const byeSport = sports.indexOf(item);
-  if(byeSport != -1) {
-      sports.splice(byeSport, 1);
+  const newSport = sports.indexOf(item);
+  if(newSport != -1) {
+      sports.splice(newSport, 1);
     res.json(`You deleted ${item}`);
   } else {
-    res.status(406).json(`${item} not accepted, ${item} already exists`);
+    res.status(404).json(`${item} does not exist`);
     next();
   }
 });
