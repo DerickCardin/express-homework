@@ -36,10 +36,33 @@ app.post('/login', (req, res) => {
 
 // global variable array.//
 
-sports = ['football', 'baseball', 'basketball', 'soccer'];
+const sports = ["football", "baseball", "basketball", "soccer"];
 
+//Add an item to the array
 
+app.post('/sport/:item', (req,res) => {
+  const item = req.params.item;
+  const newSport = sports.indexOf(item);
+  if(newSport === -1) { 
+    sports.push(item);
+    res.status(202).json(`You added ${item} to your favorite sports! Here is your current list ${sports}`)}
+    else {
+    res.status(409).json(`${item} already exists`);
+  } 
+});
 
+//Delete an item from the array
+app.delete('/sports/:item', (req, res, next) => {
+  const item = req.params.item;
+  const byeSport = sports.indexOf(item);
+  if(byeSport != -1) {
+      sports.splice(byeSport, 1);
+    res.json(`You deleted ${item}`);
+  } else {
+    res.status(406).json(`${item} not accepted, ${item} already exists`);
+    next();
+  }
+});
 
 app.listen(process.env.PORT, process.env.IP, 8080, function() {
     console.log('Listening on port 8080');
