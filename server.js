@@ -14,12 +14,14 @@ app.get('/user/:name', function(req, res) {
 });
 
 
-//query route that should accept two nums
+//query route that should accept two nums/if not a number split the word given//
 app.get('/user/add/:num', (req, res) => {
     const num1 = parseInt(req.params.num, 10);
     const num2 = parseInt(req.params.num, 10);
     res.send(`${num1 + num2}`);
-});
+    if (Number.isNaN(req.params.num))
+  return(req.params.num.split('').join(' '));
+}); 
 
 
 //login function
